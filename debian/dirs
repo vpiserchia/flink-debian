@@ -1,0 +1,3 @@
+var/lib/flink
+var/log/flink
+run/flink

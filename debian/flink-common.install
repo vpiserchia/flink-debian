@@ -1,0 +1,14 @@
+bin/*.sh usr/lib/flink/bin
+bin/*.jar usr/lib/flink/bin
+
+# configuration files
+conf/* /etc/flink
+
+opt usr/lib/flink
+plugins usr/lib/flink
+lib usr/lib/flink
+
+# licenses
+licenses usr/share/flink/doc
+
+debian/wrappers/flink usr/bin

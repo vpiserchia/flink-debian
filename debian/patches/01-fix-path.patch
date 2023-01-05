@@ -1,0 +1,21 @@
+diff -rNu a/bin/config.sh b/bin/config.sh
+--- a/bin/config.sh	2023-01-05 10:25:48.966880062 +0100
++++ b/bin/config.sh	2023-01-05 10:28:14.701072181 +0100
+@@ -125,7 +125,7 @@
+ }
+ 
+ ########################################################################################################################
+-# DEFAULT CONFIG VALUES: These values will be used when nothing has been specified in conf/flink-conf.yaml
++# DEFAULT CONFIG VALUES: These values will be used when nothing has been specified in /etc/flink/flink-conf.yaml
+ # -or- the respective environment variables are not set.
+ ########################################################################################################################
+ 
+@@ -205,7 +205,7 @@
+ # The above lib path is used by the shell script to retrieve jars in a
+ # directory, so it needs to be unmangled.
+ FLINK_HOME_DIR_MANGLED=`manglePath "$FLINK_HOME"`
+-if [ -z "$FLINK_CONF_DIR" ]; then FLINK_CONF_DIR=$FLINK_HOME_DIR_MANGLED/conf; fi
++if [ -z "$FLINK_CONF_DIR" ]; then FLINK_CONF_DIR=/etc/flink; fi
+ FLINK_BIN_DIR=$FLINK_HOME_DIR_MANGLED/bin
+ DEFAULT_FLINK_LOG_DIR=$FLINK_HOME_DIR_MANGLED/log
+ FLINK_CONF_FILE="flink-conf.yaml"

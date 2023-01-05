@@ -1,0 +1,39 @@
+Source: apache-flink
+Section: net
+Priority: extra
+Maintainer: Vito Piserchia <vpiserchia@gmail.com>
+Build-Depends: debhelper (>= 12), default-jre | default-jdk, wget
+Standards-Version: 3.9.1
+
+Package: flink
+Architecture: all
+Depends: flink-common (= ${binary:Version})
+Recommends: numactl
+Description: Apache Flink is a framework and distributed processing engine
+ for stateful computations over unbounded and bounded data streams.
+ Flink has been designed to run in all common cluster environments,
+ perform computations at in-memory speed and at any scale.
+ .
+ This is a meta package that depends on the essential packages required for
+ flink.
+
+Package: flink-common
+Architecture: all
+Depends: openjdk-11-jdk-headless | openjdk-11-jre-headless, python3, python-is-python3
+Conflicts: apache-flink
+Description: Apache Flink is a framework and distributed processing engine
+ for stateful computations over unbounded and bounded data streams.
+ Flink has been designed to run in all common cluster environments,
+ perform computations at in-memory speed and at any scale.
+ .
+ This package contains the files required by all other flink packages.
+
+Package: flink-doc
+Architecture: all
+Depends: flink-common (= ${binary:Version})
+Description: Apache Flink is a framework and distributed processing engine
+ for stateful computations over unbounded and bounded data streams.
+ Flink has been designed to run in all common cluster environments,
+ perform computations at in-memory speed and at any scale.
+ .
+ This package contains documentation and examples of Apache Flink usage.

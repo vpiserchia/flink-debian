@@ -1,0 +1,6 @@
+# link TO configs
+etc/flink usr/lib/flink/conf
+
+# link TO logs
+var/log/flink usr/lib/flink/log
+

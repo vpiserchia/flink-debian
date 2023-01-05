@@ -1,0 +1,18 @@
+[Unit]
+Description=Apache Flink Standalone JobManager
+After=network.target
+
+[Service]
+User=flink
+Group=flink
+EnvironmentFile=-/etc/default/flink
+Environment=FLINK_IDENT_STRING=systemd
+PIDFile=/run/flink/flink-systemd-standalonesession.pid
+ExecStart=/usr/lib/flink/bin/jobmanager.sh start cluster
+ExecStop=/usr/lib/flink/bin/jobmanager.sh stop cluster
+Type=simple
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+[Unit]
+Description=Apache Flink Standalone TaskManager
+After=network.target
+
+[Service]
+User=flink
+Group=flink
+EnvironmentFile=-/etc/default/flink
+Environment=FLINK_IDENT_STRING=systemd-%I
+PIDFile=/run/flink/flink-taskmanager-%I.pid
+ExecStart=/usr/lib/flink/bin/taskmanager.sh start
+ExecStop=/usr/bin/flink/bin/taskmanager.sh stop
+Type=forking
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

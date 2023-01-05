@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+
+NAME="flink"
+GROUP=$NAME
+
+# log files should be writable by flink user
+chown -R $NAME:$GROUP /var/log/flink
+chown -R $NAME:$GROUP /var/lib/flink
+chown -R $NAME:$GROUP /run/flink
+
+if [ ! -e "/var/lib/$NAME/.ssh/id_rsa" ]; then
+  su $NAME -s '/bin/bash' -c "mkdir -p /var/lib/$NAME/.ssh"
+  su $NAME -s '/bin/bash' -c "ssh-keygen -t rsa -N '' -f /var/lib/$NAME/.ssh/id_rsa" - $NAME
+  su $NAME -s '/bin/bash' -c "cat ~/.ssh/id_rsa.pub >> /var/lib/$NAME/.ssh/authorized_keys" - $NAME
+fi
+
+#DEBHELPER#
+
+[ "$1" = "configure" ] && ldconfig
+
+exit 0
+

@@ -1,0 +1,61 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+#
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+#
+# Modified to make a template file for a multi-binary package with separated
+# build-arch and build-indep targets  by Bill Allombert 2001
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+# ORIG_PATH points to version that should be built.
+# If you want to use your own custom version of flink, name ORIG_PATH
+# accordingly and copy flink's sources to ORIG_PATH manually.
+# Additionally you will want update debian/changelog accordingly.
+# Standard versions of flink will be downloaded automatically.
+# for example:
+FLINK_VERSION := $(shell cat RELEASE)
+ORIG_FILE=../apache-flink_${FLINK_VERSION}.orig.tar.gz
+ORIG_PATH=apache-flink-${FLINK_VERSION}
+
+${ORIG_PATH}: ${ORIG_FILE}
+	tar xf ${ORIG_FILE} --strip 1
+
+clean:
+	@- $(RM) orig \
+	  build \
+	  debian/files \
+	  debian/*.substvars \
+	  debian/*.debhelper \
+	  debian/*.debhelper.log
+
+	@- $(RM) -r debian/flink \
+	  debian/flink-common \
+	  debian/flink-doc
+
+build: ${ORIG_PATH}
+	touch build
+
+override_dh_auto_clean:
+	@- $(RM) build
+	@- $(RM) -r target
+
+%:
+	dh $@ --with systemd
+
+# otherwise flink-dist hangs here...
+override_dh_strip_nondeterminism:
+
+# Only cleanup on purge,
+# don’t enable service by default.
+override_dh_systemd_enable:
+	dh_systemd_enable --no-enable
+

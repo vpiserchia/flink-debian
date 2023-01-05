@@ -1,0 +1,6 @@
+#
+# Config file for the Flink runtime files and directories
+#
+
+d /var/lib/flink 0755 flink flink -
+d /var/log/flink 0755 flink flink -

@@ -1,0 +1,2 @@
+version=3
+http://mirror.nohup.it/apache/flink/flink-([0-9\.]+)/flink-([0-9\.]+)-bin-scala_2\.12\.tgz

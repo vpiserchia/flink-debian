@@ -1,0 +1,14 @@
+# Flink configuration
+
+FLINK_LOG_DIR=/var/log/flink
+
+FLINK_PID_DIR=/run/flink
+
+FLINK_IDENT_STRING=systemd
+
+# Flink does not support yet Java 17 as per https://issues.apache.org/jira/browse/FLINK-15736
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+
+#FLINK_ENV_JAVA_OPTS_CLI=
+
+#FLINK_ENV_JAVA_OPTS=
